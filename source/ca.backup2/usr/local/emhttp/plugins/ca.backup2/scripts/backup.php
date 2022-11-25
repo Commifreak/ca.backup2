@@ -404,7 +404,6 @@ logger('#######################');
 logger("appData $restoreMsg complete");
 logger('#######################');
 
-backupLog("Backup/Restore Complete.");
 if ( $errorOccured ) {
 	$status = "- Errors occurred";
 	$type = "warning";
