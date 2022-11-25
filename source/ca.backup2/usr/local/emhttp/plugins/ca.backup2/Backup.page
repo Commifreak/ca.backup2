@@ -585,11 +585,11 @@ function toggleDockerStop(el) {
 	<? if ( version_compare($unRaidVersion,"6.9.0-rc35",">=") ):?>
 		<tr><td><h2>NOTE: USB Backup is deprecated on Unraid version 6.9.0  It is advised to use the Unraid.net plugin instead</h2></td></tr>
 	<? endif; ?>
-  <td><b>USB Backup Destination:<b><br>If no destination entered, flash drive will not be backed up</td>
+  <td><b>USB Backup Destination:</b><br>If no destination entered, flash drive will not be backed up</td>
   <td><input type='text' class='setting' id="usbDestination" name="usb destination" value="" placeholder='Click To Select A Destination' data-pickfilter="HIDE_FILES_FILTER" data-pickroot="/mnt/" data-pickfolders="true" onchange='validateOptions();'></td>
 </tr>
 <tr>
-  <td><b>libvirt.img Destination:<b><br>If no destination entered, libvirt.img will not be backed up</td>
+  <td><b>libvirt.img Destination:</b><br>If no destination entered, libvirt.img will not be backed up</td>
   <td><input type='text' class='setting' id="xmlDestination" name="xml destination" value="" placeholder='Click To Select A Destination' data-pickfilter="HIDE_FILES_FILTER" data-pickroot="/mnt/" data-pickfolders="true" onchange='validateOptions();'></td>
 </tr>
 <tr>
@@ -725,7 +725,7 @@ Note that it is recommended to also exclude from the backup any associated appda
 <?=$dockerSettings?>
 </span>
 
-<font size='3' color='red'><b>Note:  You should specify a backup share (and subfolders) dedicated to that particular backup.  It is entirely possible for backups to erase any other files contained within the destinations.</font><br>
+<font size='3' color='red'><b>Note</b>:  You should specify a backup share (and subfolders) dedicated to that particular backup.  It is entirely possible for backups to erase any other files contained within the destinations.</font><br>
 
 <input type='button' value='Apply' id='Apply' onclick='apply();'><input type='button' value='Backup Now' id='Backup' onclick='backupNow();'><span class='statusLines'></span>
 </div><br>
