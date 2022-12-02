@@ -16,7 +16,7 @@
 ###2022.12.02
 - Fixed tar verification check
 - Changed schedule hour format in settings page
-- Added option to disable the warning message, when accessing the settings page
+- Added option to disable the warning message when accessing the settings page
 - Added option to create multiple archives - one for each appdata folder
 - Fixed some styling inside settings page
 - The logging tab now shows the whole log as well as date/time
