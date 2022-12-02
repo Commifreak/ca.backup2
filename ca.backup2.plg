@@ -6,8 +6,8 @@
 <!ENTITY md5       "5a0d167433ea9e0331f92c03418d5f0a">
 <!ENTITY launch    "Settings/BackupMainV2">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
-<!ENTITY github    "Squidly271/ca.backup2">
-<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/plugins/&name;.plg">
+<!ENTITY github    "Commifreak/ca.backup2">
+<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/&name;.plg">
 ]>
 
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="shield">
