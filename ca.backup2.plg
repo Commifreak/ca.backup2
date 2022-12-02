@@ -1,9 +1,9 @@
 <?xml version='1.0' standalone='yes'?>
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "ca.backup2">
-<!ENTITY author    "Andrew Zawadzki">
-<!ENTITY version   "2022.07.23">
-<!ENTITY md5       "5a0d167433ea9e0331f92c03418d5f0a">
+<!ENTITY author    "Andrew Zawadzki / Robin Kluth">
+<!ENTITY version   "2022.12.02">
+<!ENTITY md5       "96db6f4138f0571ee0d351c36d8b9042">
 <!ENTITY launch    "Settings/BackupMainV2">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Commifreak/ca.backup2">
@@ -13,6 +13,17 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="shield">
 
 <CHANGES>
+###2022.12.02
+- Fixed tar verification check
+- Changed schedule hour format in settings page
+- Added option to disable the warning message, when accessing the settings page
+- Added option to create multiple archives - one for each appdata folder
+- Fixed some styling inside settings page
+- The logging tab now shows the whole log as well as date/time
+- Fixed an error, which caused a reset of the log while backing up
+- Made docker container stops/starts more robust: the plugin now tries 3 times to start a container
+- The backup log is now copied to the destination to keep it with its run
+
 ###2022.07.23
 - Set permissions on backups to be 0777
 
