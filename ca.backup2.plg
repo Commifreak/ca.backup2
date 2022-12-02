@@ -3,7 +3,7 @@
 <!ENTITY name      "ca.backup2">
 <!ENTITY author    "Andrew Zawadzki / Robin Kluth">
 <!ENTITY version   "2022.12.02">
-<!ENTITY md5       "96db6f4138f0571ee0d351c36d8b9042">
+<!ENTITY md5       "4f6cb7a2d91490b6263f4369a4163bcc">
 <!ENTITY launch    "Settings/BackupMainV2">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Commifreak/ca.backup2">

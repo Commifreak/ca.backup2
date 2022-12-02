@@ -5,9 +5,9 @@ plugin=$(basename ${DIR})
 archive="$(dirname $(dirname ${DIR}))/archive"
 version=$(date +"%Y.%m.%d")$1
 
-mkdir -p $tmpdir
+mkdir -p $tmpdir/$DIR
 
-cp --parents -f $(find . -type f ! \( -iname "pkg-build.sh" -o -iname "sftp-config.json"  \) ) $tmpdir/
+cp --parents -f $(find . -type f ! \( -iname "pkg_build.sh" -o -iname "sftp-config.json"  \) ) $tmpdir/$DIR/
 cd $tmpdir
 makepkg -l y -c y /tmp/${plugin}-${version}-x86_64-1.txz
 rm -rf $tmpdir
