@@ -13,6 +13,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="shield">
 
 <CHANGES>
+###2022.12.04
+- Fixed a permission issue, which prevented the backup to run
+
 ###2022.12.02
 - Fixed tar verification check
 - Changed schedule hour format in settings page
