@@ -9,6 +9,7 @@ mkdir -p $tmpdir/$DIR
 
 cp --parents -f $(find . -type f ! \( -iname "pkg_build.sh" -o -iname "sftp-config.json"  \) ) $tmpdir/$DIR/
 cd $tmpdir
+chmod 0755 -R .
 makepkg -l y -c y /tmp/${plugin}-${version}-x86_64-1.txz
 rm -rf $tmpdir
 echo "MD5:"
