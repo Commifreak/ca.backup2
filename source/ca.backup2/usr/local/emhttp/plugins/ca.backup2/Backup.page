@@ -448,6 +448,8 @@ function apply() {
 
       $.post(caURL,{action:'applyBackupOptions',settings:settings,dontStop:dontStop});
 
+      // FIXME: Following code must be executed AFTER previous, not at the same time!
+
       validateOptions(true);
       changeRestoreOptions();
     });

@@ -193,8 +193,12 @@ case 'applyBackupOptions':
 
 case 'checkBackup':
   if ( is_file($communityPaths['backupLog']) ) {
-    $backupLines = "<font size='0'><tt>".file_get_contents($communityPaths['backupLog'])."</tt></font>";
-    $backupLines = str_replace("\n","<br>",$backupLines);
+      if(filesize($communityPaths['backupLog']) > 5242880 ) { // 5MB
+          @unlink($communityPaths['backupLog']);
+      } else {
+          $backupLines = "<font size='0'><tt>" . file_get_contents($communityPaths['backupLog']) . "</tt></font>";
+          $backupLines = str_replace("\n", "<br>", $backupLines);
+      }
   } else {
     $backupLines = "(No log currently existing)";
   }
