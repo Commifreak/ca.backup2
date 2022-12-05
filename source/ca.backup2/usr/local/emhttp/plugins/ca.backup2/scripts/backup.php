@@ -492,7 +492,7 @@ backupLog("Backup / Restore Completed");
 
 if (!$restore) {
     // Copy this log to its backup dir
-    copy($communityPaths['backupLog'], $destination . '/backup.log');
+    copy($communityPaths['backupLog'], ($errorOccured ? $destination.'-error' : $destination) . '/backup.log');
 }
 
 ?>
