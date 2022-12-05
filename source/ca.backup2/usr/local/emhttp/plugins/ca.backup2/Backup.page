@@ -487,6 +487,7 @@ function backupNow() {
     },
     function() {
       $.post(caURL,{action:'backupNow'});
+      $('#tab3').click();
     });
 }
 
