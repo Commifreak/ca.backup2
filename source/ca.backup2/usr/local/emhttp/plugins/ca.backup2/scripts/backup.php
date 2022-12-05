@@ -225,7 +225,7 @@ if (!$restore) {
                     // Ignore . and .. and excluded folders
                     continue;
                 }
-                $commands[$srcFolderEntry] = "cd " . escapeshellarg($source) . " && /usr/bin/tar -caf " . escapeshellarg("{$destination}/CA_backup_$srcFolderEntry$fileExt") . " $srcFolderEntry >> {$communityPaths['backupLog']} 2>&1 & echo $! > {$communityPaths['backupProgress']} && wait $!";
+                $commands[$srcFolderEntry] = "cd " . escapeshellarg($source) . " && /usr/bin/tar $rsyncExcluded -caf " . escapeshellarg("{$destination}/CA_backup_$srcFolderEntry$fileExt") . " $srcFolderEntry >> {$communityPaths['backupLog']} 2>&1 & echo $! > {$communityPaths['backupProgress']} && wait $!";
             }
         } else {
             backupLog("Separate archives disabled! Saving into one file.");
