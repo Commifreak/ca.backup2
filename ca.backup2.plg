@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name      "ca.backup2">
 <!ENTITY author    "Andrew Zawadzki / Robin Kluth">
-<!ENTITY version   "2022.12.05">
-<!ENTITY md5       "ba5efbb7115c8a8f1c779ee597c81539">
+<!ENTITY version   "2022.12.08">
+<!ENTITY md5       "2544d3653b5170db954fc5257d47fb98">
 <!ENTITY launch    "Settings/BackupMainV2">
 <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github    "Commifreak/ca.backup2">
@@ -13,6 +13,10 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="shield">
 
 <CHANGES>
+###2022.12.08
+- Fix scanned source files with spaces in it
+- Output a bit more debug info for not stopped containers.
+
 ###2022.12.05
 - Fix `Allowed memory size of xxx exhausted` error, which was caused by a too big logfile from previous plugin version.
 - Also copy the log in case of an error
