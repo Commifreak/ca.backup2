@@ -145,6 +145,8 @@ if (is_array($dockerRunning)) {
                 backupLog("done! (took " . (time() - $stopTimer) . " seconds)", true, true);
             }
 
+        } else {
+            backupLog("Not stopping {$docker['Name']}: Not started! [{$docker['Paused']} / {$docker['Status']}]");
         }
     }
 }
@@ -225,7 +227,7 @@ if (!$restore) {
                     // Ignore . and .. and excluded folders
                     continue;
                 }
-                $commands[$srcFolderEntry] = "cd " . escapeshellarg($source) . " && /usr/bin/tar $rsyncExcluded -caf " . escapeshellarg("{$destination}/CA_backup_$srcFolderEntry$fileExt") . " $srcFolderEntry >> {$communityPaths['backupLog']} 2>&1 & echo $! > {$communityPaths['backupProgress']} && wait $!";
+                $commands[$srcFolderEntry] = "cd " . escapeshellarg($source) . " && /usr/bin/tar $rsyncExcluded -caf " . escapeshellarg("{$destination}/CA_backup_$srcFolderEntry$fileExt") . " ".escapeshellarg($srcFolderEntry)." >> {$communityPaths['backupLog']} 2>&1 & echo $! > {$communityPaths['backupProgress']} && wait $!";
             }
         } else {
             backupLog("Separate archives disabled! Saving into one file.");
@@ -459,7 +461,7 @@ if (($backupOptions['notification'] == "always") || ($backupOptions['notificatio
 if (!$restore) {
     if ($backupOptions['deleteOldBackup'] && !$missingSource) {
         if ($errorOccured) {
-            backupLog("A error occured somewhere. Not deleting old backup sets of appdata");
+            backupLog("A error occurred somewhere. Not deleting old backup sets of appdata");
             exec("mv " . escapeshellarg($destination) . " " . escapeshellarg("$destination-error"));
         } else {
             $currentDate = date_create("now");
