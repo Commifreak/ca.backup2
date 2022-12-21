@@ -147,6 +147,9 @@ if (is_array($dockerRunning)) {
 
         } else {
             backupLog("Not stopping {$docker['Name']}: Not started! [{$docker['Paused']} / {$docker['Status']}]");
+            backupLog("DEBUG-INFO while this happened:");
+            $res = shell_exec("docker ps -a");
+            backupLog($res );
         }
     }
 }
@@ -271,6 +274,11 @@ foreach ($commands as $folderName => $command) {
 
     exec($command, $out, $returnValue);
 
+    if(!file_exists($communityPaths['backupProgress'])) {
+        backupLog("User aborted backup!");
+        break;
+    }
+
     if ($returnValue > 0) {
         backupLog("tar creation failed!");
         $errorOccured = true;
@@ -284,6 +292,10 @@ foreach ($commands as $folderName => $command) {
             backupLog("Verifying Backup $folderName");
             logger("Using command: $command");
             exec($command, $out, $returnValue);
+            if(!file_exists($communityPaths['verifyProgress'])) {
+                backupLog("User aborted backup!");
+                break;
+            }
             unlink($communityPaths['verifyProgress']);
             if ($returnValue > 0) { // Todo: Being overwritten!!
                 backupLog("tar verify failed!");

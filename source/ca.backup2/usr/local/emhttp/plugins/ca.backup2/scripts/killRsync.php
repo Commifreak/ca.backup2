@@ -25,6 +25,9 @@ $childPID = exec("pgrep -P $parentPID");
 if ( is_dir("/proc/$childPID") ) {
 	logger("CA Backup / Restore tar process running.  Killing $childPID");
 	posix_kill($childPID,SIGINT);
-}  
+    unlink($communityPaths['backupProgress']);
+    unlink($communityPaths['restoreProgress']);
+    unlink($communityPaths['verifyProgress']);
+}
 
 ?>
