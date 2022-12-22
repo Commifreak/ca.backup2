@@ -13,19 +13,19 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="shield">
 
 <CHANGES>
-    ##2022.12.22
-    - Added some debug infos for the "Already started" docker issue
-    - Fixes "Abort" function
+##2022.12.22
+- Added some debug infos for the "Already started" docker issue
+- Fixes "Abort" function
 
-    ###2022.12.08
-    - Fix scanned source files with spaces in it
-    - Output a bit more debug info for not stopped containers.
+###2022.12.08
+- Fix scanned source files with spaces in it
+- Output a bit more debug info for not stopped containers.
 
-    ###2022.12.05
-    - Fix `Allowed memory size of xxx exhausted` error, which was caused by a too big logfile from previous plugin
-    version.
-    - Also copy the log in case of an error
-    - Fixed the exclusion of subfolders
+###2022.12.05
+- Fix `Allowed memory size of xxx exhausted` error, which was caused by a too big logfile from previous plugin
+version.
+- Also copy the log in case of an error
+- Fixed the exclusion of subfolders
 
 ###2022.12.04
 - Fixed a permission issue, which prevented the backup to run
@@ -169,5 +169,5 @@ removepkg &name;-&version;-x86_64-1
 rm -rf &plugdir;
 rm -rf /boot/config/plugins/&name;
 </INLINE>
-</FILE> 
+</FILE>
 </PLUGIN>
