@@ -1,26 +1,31 @@
 <?xml version='1.0' standalone='yes'?>
 <!DOCTYPE PLUGIN [
-<!ENTITY name      "ca.backup2">
-<!ENTITY author    "Andrew Zawadzki / Robin Kluth">
-<!ENTITY version   "2022.12.08">
-<!ENTITY md5       "2544d3653b5170db954fc5257d47fb98">
-<!ENTITY launch    "Settings/BackupMainV2">
-<!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
-<!ENTITY github    "Commifreak/ca.backup2">
-<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/&name;.plg">
-]>
+        <!ENTITY name      "ca.backup2">
+        <!ENTITY author    "Robin Kluth">
+        <!ENTITY version   "2022.12.22">
+        <!ENTITY md5       "cb3956c01906cb3ec0e979e6675b9657">
+        <!ENTITY launch    "Settings/BackupMainV2">
+        <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
+        <!ENTITY github    "Commifreak/ca.backup2">
+        <!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/master/&name;.plg">
+        ]>
 
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="shield">
 
 <CHANGES>
-###2022.12.08
-- Fix scanned source files with spaces in it
-- Output a bit more debug info for not stopped containers.
+    ##2022.12.22
+    - Added some debug infos for the "Already started" docker issue
+    - Fixes "Abort" function
 
-###2022.12.05
-- Fix `Allowed memory size of xxx exhausted` error, which was caused by a too big logfile from previous plugin version.
-- Also copy the log in case of an error
-- Fixed the exclusion of subfolders
+    ###2022.12.08
+    - Fix scanned source files with spaces in it
+    - Output a bit more debug info for not stopped containers.
+
+    ###2022.12.05
+    - Fix `Allowed memory size of xxx exhausted` error, which was caused by a too big logfile from previous plugin
+    version.
+    - Also copy the log in case of an error
+    - Fixed the exclusion of subfolders
 
 ###2022.12.04
 - Fixed a permission issue, which prevented the backup to run
