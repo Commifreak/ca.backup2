@@ -147,9 +147,6 @@ if (is_array($dockerRunning)) {
 
         } else {
             backupLog("Not stopping {$docker['Name']}: Not started! [{$docker['Paused']} / {$docker['Status']}]");
-            backupLog("DEBUG-INFO while this happened:");
-            $res = shell_exec("docker ps -a");
-            backupLog($res );
         }
     }
 }
@@ -351,6 +348,23 @@ if (version_compare($unraidVersion["version"], "6.5.3", ">")) {
                 backupLog("Starting $docker... (try #$dockerStartTry) ", false);
                 $dockerStartCode = $dockerClient->startContainer($docker);
                 if ($dockerStartCode != 1) {
+                    if($dockerStartCode == "Container already started") {
+                        backupLog("Hmm - container is already started! DEBUG Info following...", true, true);
+                        foreach ($dockerRunning as $runningContainer) {
+                            if($runningContainer['Name'] == $docker) {
+                                backupLog("BEFORE backing up container status: ".json_encode($runningContainer));
+                                $nowRunning = $dockerClient->getDockerContainers();
+                                foreach ($nowRunning as $nowRunningContainer) {
+                                    if($nowRunningContainer["Name"] == $docker) {
+                                        backupLog("AFTER backing up container status: ".json_encode($nowRunningContainer));
+                                    }
+                                }
+                            }
+                        }
+                        $dockerContainerStarted = true;
+                        continue;
+                    }
+
                     backupLog("Error while starting container! - Code: " . $dockerStartCode, true, true);
                     if ($dockerStartTry < 3) {
                         $dockerStartTry++;
