@@ -209,7 +209,11 @@ if ($backupOptions['excluded']) {
 
 $logLine = $restore ? "Restoring" : "Backing Up";
 $fileExt = ($backupOptions['compression']) == "yes" ? ".tar.gz" : ".tar";
-backupLog("$logLine appData from $source to $destination");
+if($restore) {
+    backupLog("$logLine appData from $restoreSource to $restoreDestination");
+} else {
+    backupLog("$logLine appData from $source to $destination");
+}
 
 if (!$restore) {
     if (is_dir($source)) {
@@ -249,7 +253,7 @@ if (!$restore) {
     exec("mkdir -p " . escapeshellarg($restoreDestination));
 
     foreach ($restoreItems as $item) {
-        if (in_array($item, ['.', '..'])) {
+        if (in_array($item, ($restore ? ['.', '..', 'backup.log'] : ['.', '..']))) {
             // Ignore . and ..
             continue;
         }
@@ -271,13 +275,13 @@ foreach ($commands as $folderName => $command) {
 
     exec($command, $out, $returnValue);
 
-    if(!file_exists($communityPaths['backupProgress'])) {
-        backupLog("User aborted backup!");
+    if(!file_exists(($restore ? $communityPaths['restoreProgress'] : $communityPaths['backupProgress']))) {
+        backupLog("User aborted backup/restore!");
         break;
     }
 
     if ($returnValue > 0) {
-        backupLog("tar creation failed!");
+        backupLog("tar creation/extraction failed!");
         $errorOccured = true;
     } else {
         if (!$restore)

@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
         <!ENTITY name      "ca.backup2">
         <!ENTITY author    "Robin Kluth">
-        <!ENTITY version   "2022.12.22">
-        <!ENTITY md5       "cb3956c01906cb3ec0e979e6675b9657">
+        <!ENTITY version   "2022.12.27">
+        <!ENTITY md5       "29229aedd91d96e8531e6f50b6f176c4">
         <!ENTITY launch    "Settings/BackupMainV2">
         <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
         <!ENTITY github    "Commifreak/ca.backup2">
@@ -13,6 +13,10 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" icon="shield">
 
 <CHANGES>
+<![CDATA[
+##2022.12.27
+- Fixed restore
+
 ##2022.12.22
 - Added some debug infos for the "Already started" docker issue
 - Fixes "Abort" function
@@ -118,6 +122,7 @@ version.
 
 ###2017.11.05
 - Initial Release
+]]>
 </CHANGES>
 
 <!-- The 'pre-install' script. -->
