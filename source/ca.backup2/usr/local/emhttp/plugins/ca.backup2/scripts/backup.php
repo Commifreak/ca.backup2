@@ -104,6 +104,11 @@ if (($backupOptions['deleteOldBackup'] == "") || ($backupOptions['deleteOldBacku
 if (!$backupOptions['dockerStopDelay']) {
     $backupOptions['dockerStopDelay'] = 10;
 }
+
+if(empty($backupOptions['ignoreBackupErrors'])) {
+    $backupOptions['ignoreBackupErrors'] = 'no';
+}
+
 $backupOptions["rsyncOption"] = " -avXHq --delete ";
 
 $newFolderDated                    = exec("date +%F@%H.%M");
@@ -219,6 +224,7 @@ if (!$restore) {
     if (is_dir($source)) {
 
         // Prepare destination.
+        // TODO: Checks those things at the top!
         exec("mkdir -p " . escapeshellarg($destination));
         exec("chmod 0777 " . escapeshellarg($destination));
 
@@ -282,26 +288,31 @@ foreach ($commands as $folderName => $command) {
 
     if ($returnValue > 0) {
         backupLog("tar creation/extraction failed!");
-        $errorOccured = true;
-    } else {
-        if (!$restore)
-            exec("chmod 0777 " . escapeshellarg("{$destination}/CA_backup$folderName$fileExt"));
+        if($backupOptions['ignoreBackupErrors'] == 'no') {
+            $errorOccured = true;
+        } else {
+            backupLog("... but being ignored because the user said so!");
+            continue;
+        }
+    }
 
-        logger("$restoreMsg Complete");
-        if ($backupOptions['verify'] == "yes" && !$restore) {
-            $command = "cd " . escapeshellarg("$source") . " && /usr/bin/tar --diff -C '$source' -af " . escapeshellarg("$destination/CA_backup" . (empty($folderName) ? '' : '_') . "$folderName$fileExt") . " >> {$communityPaths['backupLog']} 2>&1 & echo $! > {$communityPaths['verifyProgress']} && wait $!";
-            backupLog("Verifying Backup $folderName");
-            logger("Using command: $command");
-            exec($command, $out, $returnValue);
-            if(!file_exists($communityPaths['verifyProgress'])) {
-                backupLog("User aborted backup!");
-                break;
-            }
-            unlink($communityPaths['verifyProgress']);
-            if ($returnValue > 0) { // Todo: Being overwritten!!
-                backupLog("tar verify failed!");
-                $errorOccured = true;
-            }
+    if (!$restore)
+        exec("chmod 0777 " . escapeshellarg("{$destination}/CA_backup$folderName$fileExt"));
+
+    logger("$restoreMsg Complete");
+    if ($backupOptions['verify'] == "yes" && !$restore) {
+        $command = "cd " . escapeshellarg("$source") . " && /usr/bin/tar --diff -C '$source' -af " . escapeshellarg("$destination/CA_backup" . (empty($folderName) ? '' : '_') . "$folderName$fileExt") . " >> {$communityPaths['backupLog']} 2>&1 & echo $! > {$communityPaths['verifyProgress']} && wait $!";
+        backupLog("Verifying Backup $folderName");
+        logger("Using command: $command");
+        exec($command, $out, $returnValue);
+        if(!file_exists($communityPaths['verifyProgress'])) {
+            backupLog("User aborted backup!");
+            break;
+        }
+        unlink($communityPaths['verifyProgress']);
+        if ($returnValue > 0) { // Todo: Being overwritten!!
+            backupLog("tar verify failed!");
+            $errorOccured = true;
         }
     }
 }

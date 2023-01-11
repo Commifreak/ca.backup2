@@ -72,6 +72,7 @@ if ( ! isset($backupOptions['compression']) ) { $backupOptions['compression'] = 
 if ( ! isset($backupOptions['verify']) ) { $backupOptions['verify'] = "yes"; }
 if ( ! isset($backupOptions['hideDockerWarning']) ) { $backupOptions['hideDockerWarning'] = "no"; }
 if ( ! isset($backupOptions['separateArchives']) ) { $backupOptions['separateArchives'] = "no"; }
+if ( ! isset($backupOptions['ignoreBackupErrors']) ) { $backupOptions['ignoreBackupErrors'] = "no"; }
 
 # fix destinationShare for compatibility with initial release
 
@@ -272,6 +273,7 @@ $(function() {
 	$("#verify").val("<?=$backupOptions['verify']?>");
 	$("#hideDockerWarning").val("<?=$backupOptions['hideDockerWarning']?>");
 	$("#separateArchives").val("<?=$backupOptions['separateArchives']?>");
+	$("#ignoreBackupErrors").val("<?=$backupOptions['ignoreBackupErrors']?>");
 
   if ( "<?=$caUpdateInstalled?>" != "true" ) {
     $("#updateApps").prop("disabled",true);
@@ -569,8 +571,16 @@ function toggleDockerStop(el) {
 	</td>
 </tr>
 <tr>
-	<td><b>Verify Backups?</b></td>
+	<td><b>Verify Backups?</b><br />This can lead to broken backups - Only enable if you know what you do!</td>
 	<td><select class='setting' id='verify' onchange='validateOptions();'>
+		<option value='no'>No</option>
+		<option value='yes'>Yes</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<td><b>Ignore errors during backup?</b><br />This can lead to broken backups - Only enable if you know what you do!</td>
+	<td><select class='setting' id='ignoreBackupErrors' onchange='validateOptions();'>
 		<option value='no'>No</option>
 		<option value='yes'>Yes</option>
 	</select>
