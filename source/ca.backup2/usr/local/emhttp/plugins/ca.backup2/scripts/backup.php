@@ -38,10 +38,13 @@ function backupLog($msg, $newLine = true, $skipDate = false)
     file_put_contents($communityPaths['backupLog'], ($skipDate ? '' : "[" . date("d.m.Y H:i:s") . "]") . " $msg" . ($newLine ? "\n" : ''), FILE_APPEND);
 }
 
-if (!is_dir("/mnt/user")) {
-    logger("It doesn't appear that the array is running.  Exiting CA Backup");
+$emhttpVar = parse_ini_file('/var/local/emhttp/var.ini');
+if (!$emhttpVar || $emhttpVar['fsState'] != 'Started') {
+    backupLog("It doesn't appear that the array is running.  Exiting CA Backup");
+    notify("CA Backup", "appData backup", "Error occured!", "Array is not started! Not creating backup.", 'alert');
     exit();
 }
+
 $backupOptions = readJsonFile($communityPaths['backupOptions']);
 if (!$backupOptions) {
     @unlink($communityPaths['backupProgress']);
