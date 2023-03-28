@@ -2,6 +2,14 @@ Menu="BackupMainV2:3"
 Title="Backup / Restore Status"
 ---
 
+<?php
+$unraid = parse_ini_file('/etc/unraid-version');
+if (version_compare($unraid['version'],"6.11.5",'>')) {
+    echo "This plugin is deprecated under Unraid 6.12! Please <a href='/Apps'>install</a> the new 'Appdata Backup' plugin.";
+    return;
+}
+?>
+
 <script>
 var caURL = "/plugins/ca.backup2/include/backupExec.php";
 

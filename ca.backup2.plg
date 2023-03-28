@@ -2,8 +2,8 @@
 <!DOCTYPE PLUGIN [
         <!ENTITY name      "ca.backup2">
         <!ENTITY author    "Robin Kluth">
-        <!ENTITY version   "2023.01.28">
-        <!ENTITY md5       "4855fa5cba9d12754b42d55f56d9ee38">
+        <!ENTITY version   "2023.03.28c">
+        <!ENTITY md5       "ebb52b856918c7d6e090063a2551711f">
         <!ENTITY launch    "Settings/BackupMainV2">
         <!ENTITY plugdir   "/usr/local/emhttp/plugins/&name;">
         <!ENTITY github    "Commifreak/ca.backup2">
@@ -14,6 +14,9 @@
 
 <CHANGES>
 <![CDATA[
+###2023.03.28
+- Show deprecation banner, if installed on Unraid 6.12
+
 ###2023.01.28
 - Fixed Array state detection - now works the Unraid way
 
@@ -159,8 +162,7 @@ mkdir -p /var/lib/docker/unraid/ca.backup2.datastore
 mkdir -p /boot/config/plugins/ca.backup2/
 rm -rf /usr/local/emhttp/plugins/ca.backup2/CA.page
 rm -rf /usr/local/emhttp/plugins/ca.backup2/caHelp.page
-/usr/local/emhttp/plugins/ca.backup2/scripts/removeCron.php
-/usr/local/emhttp/plugins/ca.backup2/scripts/addCron.php
+
 echo ""
 echo "----------------------------------------------------"
 echo " &name; has been installed."
@@ -171,6 +173,13 @@ echo "----------------------------------------------------"
 echo ""
 </INLINE>
 </FILE>
+
+    <FILE Run="/bin/bash" Max="6.11.5">
+        <INLINE>
+            /usr/local/emhttp/plugins/ca.backup2/scripts/removeCron.php
+            /usr/local/emhttp/plugins/ca.backup2/scripts/addCron.php
+        </INLINE>
+    </FILE>
 
 <!--
 The 'remove' script.

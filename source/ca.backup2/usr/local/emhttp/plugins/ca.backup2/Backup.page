@@ -7,6 +7,17 @@ Title="Backup / Settings"
 # Community Applications copyright 2015-2020, Andrew Zawadzki #
 #                                                             #
 ###############################################################
+
+
+$unraid = parse_ini_file('/etc/unraid-version');
+if (version_compare($unraid['version'],"6.11.5",'>')) {
+    echo <<<TEXT
+<script>addBannerWarning("This plugin is deprecated under Unraid 6.12! Please <a href='/Apps'>install</a> the new 'Appdata Backup' plugin.")</script>
+TEXT;
+    echo "This plugin is deprecated under Unraid 6.12! Please <a href='/Apps'>install</a> the new 'Appdata Backup' plugin. Please migrate your following settings to the new plugin and remove the old one.";
+
+}
+
 require_once("/usr/local/emhttp/plugins/ca.backup2/include/caCredits.php");
 require_once("/usr/local/emhttp/plugins/dynamix.docker.manager/include/DockerClient.php");
 
